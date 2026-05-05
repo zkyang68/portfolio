@@ -4,10 +4,14 @@ import { fileURLToPath } from 'url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-function run(cmd, label) {
+function run(cmd, label, envVars = {}) {
   console.log(`\n[${label}]`);
   try {
-    const out = execSync(cmd, { encoding: 'utf-8', cwd: ROOT });
+    const out = execSync(cmd, {
+      encoding: 'utf-8',
+      cwd: ROOT,
+      env: { ...process.env, ...envVars },
+    });
     if (out.trim()) console.log(out.trim());
   } catch (err) {
     console.error(err.stderr || err.message);
@@ -27,7 +31,7 @@ if (status.trim()) {
   run('git add -A', '3/5 暂存文件');
   run('git commit -m "sync: 更新个人资料 [skip ci]"', '4/5 提交');
   run('git push origin master', '5/5 推送代码');
-  run('npm run deploy', '部署 GitHub Pages');
+  run('npx gh-pages -d dist', '部署 GitHub Pages', { HTTPS_PROXY: 'http://127.0.0.1:33210', HTTP_PROXY: 'http://127.0.0.1:33210' });
   console.log('\n✅ 同步完成！https://zkyang68.github.io/portfolio/');
 } else {
   console.log('\n⏭  没有变更，跳过提交');

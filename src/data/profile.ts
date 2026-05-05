@@ -16,7 +16,7 @@ const profile: ProfileData = {
       website: '',
     },
     avatarUrl: '/images/ph.jpg',
-    heroBackgroundUrl: '',
+    heroBackgroundUrl: '/images/bg.png',
   },
 
   about: {

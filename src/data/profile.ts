@@ -15,8 +15,8 @@ const profile: ProfileData = {
       linkedin: '',
       website: '',
     },
-    avatarUrl: '/images/ph.jpg',
-    heroBackgroundUrl: '/images/bg.png',
+    avatarUrl: './images/ph.jpg',
+    heroBackgroundUrl: './images/bg.png',
   },
 
   about: {

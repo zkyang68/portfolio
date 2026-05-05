@@ -355,12 +355,12 @@ function main() {
     const data = parse(text);
 
     // Auto-detect images in myfiles/
-    if (existsSync(join(MYFILES_DIR, 'ph.jpg'))) data.avatarUrl = '/images/ph.jpg';
-    else if (existsSync(join(MYFILES_DIR, 'ph.png'))) data.avatarUrl = '/images/ph.png';
+    if (existsSync(join(MYFILES_DIR, 'ph.jpg'))) data.avatarUrl = './images/ph.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'ph.png'))) data.avatarUrl = './images/ph.png';
     else data.avatarUrl = '';
 
-    if (existsSync(join(MYFILES_DIR, 'bg.jpg'))) data.heroBackgroundUrl = '/images/bg.jpg';
-    else if (existsSync(join(MYFILES_DIR, 'bg.png'))) data.heroBackgroundUrl = '/images/bg.png';
+    if (existsSync(join(MYFILES_DIR, 'bg.jpg'))) data.heroBackgroundUrl = './images/bg.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'bg.png'))) data.heroBackgroundUrl = './images/bg.png';
     else data.heroBackgroundUrl = '';
 
     const ts = generateProfileTs(data);

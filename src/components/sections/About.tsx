@@ -4,7 +4,7 @@ import SectionTitle from '../ui/SectionTitle';
 import styles from './About.module.css';
 
 export default function About() {
-  const { about } = profile;
+  const { about, personal } = profile;
 
   return (
     <section id="about" className="section">
@@ -18,6 +18,16 @@ export default function About() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
+          {personal.avatarUrl && (
+            <div className={styles.photoCol}>
+              <img
+                src={personal.avatarUrl}
+                alt={personal.name}
+                className={styles.photo}
+              />
+            </div>
+          )}
+
           <div className={styles.text}>
             {about.paragraphs.map((p, i) => (
               <p key={i} className={styles.paragraph}>{p}</p>

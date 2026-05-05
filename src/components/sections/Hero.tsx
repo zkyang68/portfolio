@@ -7,6 +7,14 @@ export default function Hero() {
 
   return (
     <section id="hero" className={styles.hero}>
+      {personal.heroBackgroundUrl && (
+        <div
+          className={styles.bgImage}
+          style={{ backgroundImage: `url(${personal.heroBackgroundUrl})` }}
+        />
+      )}
+      <div className={styles.overlay} />
+
       <div className={`container ${styles.inner}`}>
         <motion.div
           className={styles.content}
@@ -14,6 +22,21 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
+          {personal.avatarUrl && (
+            <motion.div
+              className={styles.avatarWrapper}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <img
+                src={personal.avatarUrl}
+                alt={personal.name}
+                className={styles.avatar}
+              />
+            </motion.div>
+          )}
+
           <p className={styles.greeting}>你好，我是</p>
           <h1 className={styles.name}>{personal.name}</h1>
           <p className={styles.title}>{personal.title}</p>
@@ -44,11 +67,13 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div className={styles.bgDecoration}>
-          <div className={styles.circle1} />
-          <div className={styles.circle2} />
-          <div className={styles.circle3} />
-        </div>
+        {!personal.heroBackgroundUrl && (
+          <div className={styles.bgDecoration}>
+            <div className={styles.circle1} />
+            <div className={styles.circle2} />
+            <div className={styles.circle3} />
+          </div>
+        )}
       </div>
     </section>
   );

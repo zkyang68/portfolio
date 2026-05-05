@@ -1,8 +1,22 @@
 .grid {
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 3rem;
+  grid-template-columns: 180px 1fr 280px;
+  gap: 2.5rem;
   align-items: start;
+}
+
+.photoCol {
+  display: flex;
+  justify-content: center;
+}
+
+.photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.2);
 }
 
 .paragraph {
@@ -51,6 +65,16 @@
 
 .highlightTag:hover {
   transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .photoCol {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {

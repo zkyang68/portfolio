@@ -1,10 +1,12 @@
-import { readFileSync, writeFileSync, watch } from 'fs';
+import { readFileSync, writeFileSync, copyFileSync, existsSync, mkdirSync, watch } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TXT_PATH = join(__dirname, '..', 'myfiles', 'my-info.txt');
 const OUTPUT_PATH = join(__dirname, '..', 'src', 'data', 'profile.ts');
+const MYFILES_DIR = join(__dirname, '..', 'myfiles');
+const IMAGES_DIR = join(__dirname, '..', 'public', 'images');
 
 function parse(text) {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
@@ -252,6 +254,8 @@ function generateProfileTs(data) {
       linkedin: '',
       website: '',
     },
+    avatarUrl: '${escape(data.avatarUrl || '')}',
+    heroBackgroundUrl: '${escape(data.heroBackgroundUrl || '')}',
   }`;
 
   const aboutStr = `  about: {
@@ -330,12 +334,38 @@ export default profile;
 `;
 }
 
+function syncImages() {
+  const imageFiles = ['photo.jpg', 'photo.png', 'hero-bg.jpg', 'hero-bg.png'];
+  if (!existsSync(IMAGES_DIR)) {
+    mkdirSync(IMAGES_DIR, { recursive: true });
+  }
+  for (const file of imageFiles) {
+    const src = join(MYFILES_DIR, file);
+    const dest = join(IMAGES_DIR, file);
+    if (existsSync(src)) {
+      copyFileSync(src, dest);
+      console.log(`[generate-profile] 🖼  已同步图片: ${file}`);
+    }
+  }
+}
+
 function main() {
   try {
     const text = readFileSync(TXT_PATH, 'utf-8');
     const data = parse(text);
+
+    // Auto-detect images in myfiles/
+    if (existsSync(join(MYFILES_DIR, 'photo.jpg'))) data.avatarUrl = '/images/photo.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'photo.png'))) data.avatarUrl = '/images/photo.png';
+    else data.avatarUrl = '';
+
+    if (existsSync(join(MYFILES_DIR, 'hero-bg.jpg'))) data.heroBackgroundUrl = '/images/hero-bg.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'hero-bg.png'))) data.heroBackgroundUrl = '/images/hero-bg.png';
+    else data.heroBackgroundUrl = '';
+
     const ts = generateProfileTs(data);
     writeFileSync(OUTPUT_PATH, ts, 'utf-8');
+    syncImages();
     console.log('[generate-profile] ✅ profile.ts 已从 my-info.txt 重新生成');
   } catch (err) {
     console.error('[generate-profile] ❌ 生成失败:', err.message);

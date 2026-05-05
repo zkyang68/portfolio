@@ -14,6 +14,7 @@ export interface PersonalInfo {
   cities: string[];
   salary: string;
   avatarUrl?: string;
+  heroBackgroundUrl?: string;
   resumeUrl?: string;
   social: SocialLinks;
 }

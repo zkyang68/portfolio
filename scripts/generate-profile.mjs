@@ -335,7 +335,7 @@ export default profile;
 }
 
 function syncImages() {
-  const imageFiles = ['photo.jpg', 'photo.png', 'hero-bg.jpg', 'hero-bg.png'];
+  const imageFiles = ['ph.jpg', 'ph.png', 'bg.jpg', 'bg.png'];
   if (!existsSync(IMAGES_DIR)) {
     mkdirSync(IMAGES_DIR, { recursive: true });
   }
@@ -355,12 +355,12 @@ function main() {
     const data = parse(text);
 
     // Auto-detect images in myfiles/
-    if (existsSync(join(MYFILES_DIR, 'photo.jpg'))) data.avatarUrl = '/images/photo.jpg';
-    else if (existsSync(join(MYFILES_DIR, 'photo.png'))) data.avatarUrl = '/images/photo.png';
+    if (existsSync(join(MYFILES_DIR, 'ph.jpg'))) data.avatarUrl = '/images/ph.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'ph.png'))) data.avatarUrl = '/images/ph.png';
     else data.avatarUrl = '';
 
-    if (existsSync(join(MYFILES_DIR, 'hero-bg.jpg'))) data.heroBackgroundUrl = '/images/hero-bg.jpg';
-    else if (existsSync(join(MYFILES_DIR, 'hero-bg.png'))) data.heroBackgroundUrl = '/images/hero-bg.png';
+    if (existsSync(join(MYFILES_DIR, 'bg.jpg'))) data.heroBackgroundUrl = '/images/bg.jpg';
+    else if (existsSync(join(MYFILES_DIR, 'bg.png'))) data.heroBackgroundUrl = '/images/bg.png';
     else data.heroBackgroundUrl = '';
 
     const ts = generateProfileTs(data);

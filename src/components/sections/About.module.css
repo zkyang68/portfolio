@@ -15,8 +15,8 @@
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid var(--color-accent);
-  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.2);
+  display: block;
+  box-shadow: 0 0 0 3px var(--color-accent), 0 4px 20px rgba(79, 70, 229, 0.25);
 }
 
 .paragraph {

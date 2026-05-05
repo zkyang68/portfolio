@@ -1,0 +1,16 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--color-text-primary);
+  background: var(--color-bg-tertiary);
+  transition: all var(--transition);
+}
+
+.toggle:hover {
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}

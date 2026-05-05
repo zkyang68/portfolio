@@ -1,0 +1,36 @@
+.wrapper {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.underline {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.65rem;
+  }
+
+  .wrapper {
+    margin-bottom: 2.5rem;
+  }
+}
